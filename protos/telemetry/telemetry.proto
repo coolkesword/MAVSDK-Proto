@@ -7,6 +7,7 @@ option java_outer_classname = "TelemetryProto";
 
 service TelemetryService {
     rpc SubscribePosition(SubscribePositionRequest) returns(stream PositionResponse) {}
+    rpc SubscribePositionVelocityNed(SubscribePositionVelocityNedRequest) returns(stream PositionVelocityNedResponse) {}
     rpc SubscribeHome(SubscribeHomeRequest) returns(stream HomeResponse) {}
     rpc SubscribeInAir(SubscribeInAirRequest) returns(stream InAirResponse) {}
     rpc SubscribeArmed(SubscribeArmedRequest) returns(stream ArmedResponse) {}
@@ -26,6 +27,12 @@ service TelemetryService {
 message SubscribePositionRequest {}
 message PositionResponse {
     Position position = 1;
+}
+
+message SubscribePositionVelocityNedRequest {}
+message PositionVelocityNedResponse {
+    PositionNed position = 1;
+    VelocityNed velocity = 2;
 }
 
 message SubscribeHomeRequest {}
@@ -116,6 +123,18 @@ message EulerAngle {
     float roll_deg = 1;
     float pitch_deg = 2;
     float yaw_deg = 3;
+}
+
+message PositionNed{
+    float position_x_m = 1;
+    float position_y_m = 2;
+    float position_z_m = 3;
+}
+
+message VelocityNed{
+    float velocity_x_m_s = 1;
+    float velocity_y_m_s = 2;
+    float velocity_z_m_s = 3;
 }
 
 message SpeedNed {
