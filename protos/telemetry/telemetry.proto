@@ -31,8 +31,7 @@ message PositionResponse {
 
 message SubscribePositionVelocityNedRequest {}
 message PositionVelocityNedResponse {
-    PositionNed position = 1;
-    VelocityNed velocity = 2;
+    PositionVelocityNED pos_vel_ned = 1;
 }
 
 message SubscribeHomeRequest {}
@@ -125,16 +124,13 @@ message EulerAngle {
     float yaw_deg = 3;
 }
 
-message PositionNed{
+message PositionVelocityNED{
     float position_x_m = 1;
     float position_y_m = 2;
     float position_z_m = 3;
-}
-
-message VelocityNed{
-    float velocity_x_m_s = 1;
-    float velocity_y_m_s = 2;
-    float velocity_z_m_s = 3;
+    float velocity_x_m_s = 4;
+    float velocity_y_m_s = 5;
+    float velocity_z_m_s = 6;
 }
 
 message SpeedNed {
