@@ -12,6 +12,8 @@ option java_outer_classname = "TelemetryProto";
 service TelemetryService {
     // Subscribe to 'position' updates.
     rpc SubscribePosition(SubscribePositionRequest) returns(stream PositionResponse) {}
+    // Subscribe to local NED position and velocity updates
+    rpc SubscribePositionVelocityNed(SubscribePositionVelocityNedRequest) returns(stream PositionVelocityNedResponse) {}
     // Subscribe to 'home position' updates.
     rpc SubscribeHome(SubscribeHomeRequest) returns(stream HomeResponse) {}
     // Subscribe to in-air updates.
@@ -51,6 +53,11 @@ service TelemetryService {
 message SubscribePositionRequest {}
 message PositionResponse {
     Position position = 1; // The next position
+}
+
+message SubscribePositionVelocityNedRequest {}
+message PositionVelocityNedResponse {
+    PositionVelocityNED pos_vel_ned = 1;
 }
 
 message SubscribeHomeRequest {}
@@ -182,6 +189,15 @@ message EulerAngle {
     float yaw_deg = 3; // Yaw angle in degrees, positive is clock-wise seen from above
 }
 
+message PositionVelocityNED{
+    float position_x_m = 1;
+    float position_y_m = 2;
+    float position_z_m = 3;
+    float velocity_x_m_s = 4;
+    float velocity_y_m_s = 5;
+    float velocity_z_m_s = 6;
+}
+
 // Angular velocity type
 message AngularVelocityBody {
     float roll_rad_s = 1; // Roll angular velocity
@@ -280,9 +296,9 @@ message ActuatorOutputStatus {
 
 // Landed State enumeration
 enum LandedState{
-    LANDED_STATE_UNKNOWN = 0;
-    LANDED_STATE_ON_GROUND = 1;
-    LANDED_STATE_IN_AIR = 2;
-    LANDED_STATE_TAKING_OFF = 3;
-    LANDED_STATE_LANDING = 4;
+    LANDED_UNKNOWN = 0;
+    LANDED_ON_GROUND = 1;
+    LANDED_IN_AIR = 2;
+    LANDED_TAKING_OFF = 3;
+    LANDED_LANDING = 4;
 }

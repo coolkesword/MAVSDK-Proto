@@ -106,7 +106,6 @@ message SetPositionNedResponse {}
 message SetPositionNedYawRateRequest {
     PositionNedYawRate position_ned_yawrate = 1; // Position and yaw rate
 }
-
 message SetPositionNedYawRateResponse {}
 
 message SetVelocityBodyRequest {
