@@ -52,6 +52,12 @@ service OffboardService {
      * Set the position in NED coordinates and yaw.
      */
     rpc SetPositionNed(SetPositionNedRequest) returns(SetPositionNedResponse) {}
+
+    /*
+     * Set the position in NED coordinates and yaw rate.
+     */
+    rpc SetPositionNedYawRate(SetPositionNedYawRateRequest) returns(SetPositionNedYawRateResponse) {}
+
     /*
      * Set the velocity in body coordinates and yaw angular rate.
      */
@@ -96,6 +102,12 @@ message SetPositionNedRequest {
     PositionNedYaw position_ned_yaw = 1; // Position and yaw
 }
 message SetPositionNedResponse {}
+
+message SetPositionNedYawRateRequest {
+    PositionNedYawRate position_ned_yawrate = 1; // Position and yaw rate
+}
+
+message SetPositionNedYawRateResponse {}
 
 message SetVelocityBodyRequest {
     VelocityBodyYawspeed velocity_body_yawspeed = 1; // Velocity and yaw angular rate
@@ -158,6 +170,14 @@ message PositionNedYaw {
     float east_m = 2; // Position East (in metres)
     float down_m = 3; // Position Down (in metres)
     float yaw_deg = 4; // Yaw in degrees (0 North, positive is clock-wise looking from above)
+}
+
+// Type for position commands in NED (North East Down) coordinates and yaw rate.
+message PositionNedYawRate {
+    float north_m = 1; // Position North (in metres)
+    float east_m = 2; // Position East (in metres)
+    float down_m = 3; // Position Down (in metres)
+    float yawspeed_deg_s = 4; // Yaw rate in degrees (0 North, positive is clock-wise looking from above)
 }
 
 // Type for velocity commands in body coordinates.
